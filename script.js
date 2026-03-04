@@ -58,8 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pick 2 random writers
     shuffleArray(writers);
     const selectedWriters = writers.slice(0, 2);
-    // Append to body instead of header so they can use the full width of the screen
-    const bodyEl = document.querySelector('body');
+    // Anchor them specifically to the title-container so we can push them predictably outside of it
+    const titleContainerEl = document.querySelector('.title-container');
 
     selectedWriters.forEach((writer, index) => {
         const img = document.createElement('img');
@@ -72,21 +72,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const rot = (Math.random() * 20) - 10;
         img.style.transform = `rotate(${rot}deg)`;
         
-        // Place them far out in the margins (between 2% and 15% from the edges of the screen)
-        // Set their vertical position to be somewhere in the top 300px
-        const randomTop = Math.floor(Math.random() * 200) + 20; 
+        // Push them roughly 140px outside the edges of the title box
+        const randomTop = Math.floor(Math.random() * 80) - 20; // Top position relative to the box
+        const sideOffset = -150 - Math.floor(Math.random() * 60); // Between -150px and -210px away
         
         if (index === 0) {
-            // Left side margin
-            img.style.left = Math.floor(Math.random() * 10) + 2 + '%';
+            img.style.left = sideOffset + 'px';
             img.style.top = randomTop + 'px';
         } else {
-            // Right side margin
-            img.style.right = Math.floor(Math.random() * 10) + 2 + '%';
+            img.style.right = sideOffset + 'px';
             img.style.top = randomTop + 'px';
         }
         
-        bodyEl.appendChild(img);
+        titleContainerEl.appendChild(img);
     });
 
 

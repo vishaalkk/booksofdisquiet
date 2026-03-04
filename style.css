@@ -22,6 +22,7 @@ body {
     margin: 0;
     padding: 0 20px 40px 20px;
     cursor: crosshair;
+    overflow-x: hidden; /* Prevents floating writers from creating horizontal scrollbars */
 }
 
 /* Removed position: relative from .main-header so writers can break out of its 900px max-width boundary and use the full screen width */
@@ -37,12 +38,11 @@ body {
 
 /* Floating Writer Caricatures */
 .floating-writer {
-    /* Use fixed positioning to stick them to the viewport, or absolute to the body. We'll use absolute to the body so they scroll with the page. */
     position: absolute;
     width: 130px;
     height: 160px;
     object-fit: cover;
-    z-index: 1;
+    z-index: 0; /* Changed to 0 so they sit behind the main content if they overlap */
     pointer-events: none; /* So they don't block clicks */
     
     /* Neo-brutalist / Newspaper Clipping Aesthetic */
@@ -57,7 +57,8 @@ body {
 }
 
 .title-container {
-    position: relative;
+    position: relative; /* This is the anchor point for the floating writers */
+    z-index: 10;
     border: 3px solid var(--ink);
     background: var(--paper);
     padding: 20px 30px;
@@ -112,6 +113,7 @@ h1 {
 
 .search-box {
     position: relative;
+    z-index: 10;
     width: 100%;
     max-width: 500px;
     transform: rotate(1deg);
@@ -152,6 +154,8 @@ h1 {
     gap: 30px;
     height: 75vh; /* Fixed height for the "OS" feel */
     min-height: 600px;
+    position: relative;
+    z-index: 10;
 }
 
 .pane-header {
