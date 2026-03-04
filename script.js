@@ -316,9 +316,8 @@ document.addEventListener('DOMContentLoaded', () => {
             mobileNavToggle.onclick = (e) => {
                 e.stopPropagation();
                 directoryPane.classList.toggle('drawer-open');
-                mobileNavToggle.innerHTML = directoryPane.classList.contains('drawer-open') ? 
-                    '<span class="folder-icon">✖</span> CLOSE MENU' : 
-                    '<span class="folder-icon">📂</span> BROWSE ARCHIVES';
+                const iconAlt = mobileNavToggle.querySelector('.nav-icon-alt');
+                iconAlt.innerHTML = directoryPane.classList.contains('drawer-open') ? '✖' : '📖';
             };
         }
 
@@ -329,7 +328,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Close drawer on mobile after selection
             if (window.innerWidth <= 900) {
                 directoryPane.classList.remove('drawer-open');
-                mobileNavToggle.innerHTML = '<span class="folder-icon">📂</span> BROWSE ARCHIVES';
+                const iconAlt = mobileNavToggle.querySelector('.nav-icon-alt');
+                if (iconAlt) iconAlt.innerHTML = '📖';
             }
 
             document.querySelectorAll('.tree-item').forEach(i => {
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             item.classList.add('active');
             const activeIcon = item.querySelector('.folder-icon');
-            if(activeIcon && !item.getAttribute('data-view')) activeIcon.innerText = '📂';
+            if(activeIcon && !item.getAttribute('data-view')) activeIcon.innerText = '📖';
             const folderData = item.getAttribute('data-folder');
             const view = item.getAttribute('data-view');
             if (folderData === 'all') {
@@ -350,11 +350,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const parts = folderData.split('-');
                 currentFolderType = parts[0];
                 currentFolderValue = parts.slice(1).join('-');
-                currentFolderNameEl.innerText = item.innerText.replace(/[📂📁🗺️📊]/g, '').trim();
+                currentFolderNameEl.innerText = item.innerText.replace(/[📖📁🗺️📊]/g, '').trim();
             }
             switchView(view || 'grid');
         });
 
+        // Thermal Receipt Listeners
         gridContainer.addEventListener('click', (e) => {
             const btn = e.target.closest('.view-receipt-btn');
             if (btn) {
@@ -369,12 +370,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // Close modal when clicking the dark background overlay
+        receiptModal.addEventListener('click', (e) => {
+            if (e.target === receiptModal) {
+                receiptModal.style.display = 'none';
+            }
+        });
+
         if (closeReceiptBtn) closeReceiptBtn.onclick = () => receiptModal.style.display = 'none';
         if (closeOverlay) closeOverlay.onclick = () => cityOverlay.classList.remove('active');
 
         window.onclick = (e) => {
-            if (e.target === receiptModal) receiptModal.style.display = 'none';
-            if (e.target === cityOverlay) cityOverlay.classList.remove('active');
+            // Close city map overlay if clicking outside the detail box
+            if (cityOverlay.classList.contains('active') && 
+                !cityOverlay.contains(e.target) && 
+                !e.target.closest('.city-doodle-marker')) {
+                cityOverlay.classList.remove('active');
+            }
             
             // Close mobile drawer when clicking outside
             if (window.innerWidth <= 900 && 
@@ -382,7 +394,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.target !== mobileNavToggle && 
                 directoryPane.classList.contains('drawer-open')) {
                 directoryPane.classList.remove('drawer-open');
-                mobileNavToggle.innerHTML = '<span class="folder-icon">📂</span> BROWSE ARCHIVES';
+                const iconAlt = mobileNavToggle.querySelector('.nav-icon-alt');
+                if (iconAlt) iconAlt.innerHTML = '📖';
             }
         };
 

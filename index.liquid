@@ -63,10 +63,26 @@
                     <span class="folder-icon">📊</span> Disk Utility.exe
                 </div>
                 
-                <div class="tree-section collapsible" data-target="statusFolders">
-                    <span class="collapse-icon">−</span> BY STATUS
+                <div class="tree-section collapsible" data-target="languageFolders">
+                    <span class="collapse-icon">+</span> BY LANGUAGE
                 </div>
-                <div class="folder-group" id="statusFolders">
+                <!-- We will populate these dynamically with JS based on the data -->
+                <div class="folder-group collapsed" id="languageFolders"></div>
+                
+                <div class="tree-section collapsible" data-target="authorFolders">
+                    <span class="collapse-icon">+</span> BY WRITER
+                </div>
+                <div class="folder-group collapsed" id="authorFolders"></div>
+                
+                <div class="tree-section collapsible" data-target="storeFolders">
+                    <span class="collapse-icon">+</span> BY BOOKSTORE
+                </div>
+                <div class="folder-group collapsed" id="storeFolders"></div>
+
+                <div class="tree-section collapsible" data-target="statusFolders">
+                    <span class="collapse-icon">+</span> BY STATUS
+                </div>
+                <div class="folder-group collapsed" id="statusFolders">
                     <div class="tree-item" data-folder="status-read" data-view="grid">
                         <span class="folder-icon">📁</span> Read
                     </div>
@@ -74,22 +90,6 @@
                         <span class="folder-icon">📁</span> Unread
                     </div>
                 </div>
-
-                <div class="tree-section collapsible" data-target="languageFolders">
-                    <span class="collapse-icon">−</span> BY LANGUAGE
-                </div>
-                <!-- We will populate these dynamically with JS based on the data -->
-                <div class="folder-group" id="languageFolders"></div>
-                
-                <div class="tree-section collapsible" data-target="authorFolders">
-                    <span class="collapse-icon">−</span> BY WRITER
-                </div>
-                <div class="folder-group collapsed" id="authorFolders"></div>
-                
-                <div class="tree-section collapsible" data-target="storeFolders">
-                    <span class="collapse-icon">−</span> BY BOOKSTORE
-                </div>
-                <div class="folder-group collapsed" id="storeFolders"></div>
             </div>
         </aside>
 
@@ -226,7 +226,14 @@
 
     <!-- Mobile Navigation Toggle -->
     <button id="mobileNavToggle" class="mobile-nav-btn">
-        <span class="folder-icon">📂</span> BROWSE ARCHIVES
+        <div class="cat-btn-content">
+            <svg class="nav-cat" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                <path d="M 30 50 Q 30 20 50 20 Q 70 20 70 50" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+                <path d="M 35 25 L 30 5 L 45 15" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+                <path d="M 65 25 L 70 5 L 55 15" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"/>
+            </svg>
+            <span class="nav-icon-alt">📖</span>
+        </div>
     </button>
 
     <!-- Thermal Receipt Modal -->

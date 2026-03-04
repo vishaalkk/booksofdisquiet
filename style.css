@@ -881,6 +881,10 @@ h1 {
     .folder-group {
         display: block;
     }
+    
+    .folder-group.collapsed {
+        display: none;
+    }
 
     .tree-item {
         margin-bottom: 8px;
@@ -900,26 +904,64 @@ h1 {
         border: 2px solid var(--ink);
     }
 
-    /* The Navigation Button (Floating at bottom) */
+    /* The Navigation Button (Floating at bottom-right) */
     .mobile-nav-btn {
         display: flex;
         position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 5500;
-        background: var(--ink);
-        color: var(--paper);
+        bottom: 25px;
+        right: 25px;
+        left: auto;
+        transform: none;
+        z-index: 7000;
+        background: var(--highlight);
+        color: var(--ink);
         border: 3px solid var(--ink);
-        padding: 12px 25px;
-        font-family: var(--font-mono);
-        font-weight: bold;
-        font-size: 1rem;
-        box-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+        width: 65px;
+        height: 65px;
+        padding: 0;
+        box-shadow: 6px 6px 0px var(--ink);
         align-items: center;
-        gap: 10px;
+        justify-content: center;
         cursor: pointer;
-        white-space: nowrap;
+        border-radius: 50%; /* Circular */
+        overflow: visible;
+    }
+
+    .cat-btn-content {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-cat {
+        width: 45px;
+        height: 30px;
+        position: absolute;
+        top: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-icon-alt {
+        font-size: 1.2rem;
+        position: absolute;
+        bottom: 10px;
+        font-weight: bold;
+    }
+
+    .mobile-nav-btn:active {
+        transform: translateY(2px) translateX(2px);
+        box-shadow: 2px 2px 0px var(--ink);
+    }
+
+    .directory-pane.drawer-open ~ .mobile-nav-btn .nav-cat {
+        transform: translateY(-5px) scale(1.1);
+    }
+
+    .directory-pane.drawer-open ~ .mobile-nav-btn {
+        background: #FF9AA2; /* Change color when open */
     }
 
     /* 6. Expand the content pane to take up remaining height */
