@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books of Disquiet - Archives</title>
     <link rel="stylesheet" href="{{ '/style.css' | url }}">
+    <!-- Leaflet Map CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
@@ -33,7 +35,7 @@
                 <text x="135" y="10" font-family="monospace" font-size="16" fill="#1C1B18" class="zzz">Z</text>
             </svg>
             <h1>Books of Disquiet</h1>
-            <p class="subtitle">"I am nothing. I'll never be anything. I couldn't want to be something. Apart from that, I have in me all the dreams in the world."</p>
+            <p class="subtitle">"I had woken up early, and I took a long time getting ready to exist"<br>— The Book of Disquiet, Fernando Pessoa</p>
         </div>
         
         <div class="search-box">
@@ -49,18 +51,26 @@
                 <h2>V:\ARCHIVES\</h2>
             </div>
             <div class="folder-tree" id="folderTree">
-                <div class="tree-item active" data-folder="all">
+                <div class="tree-item active" data-folder="all" data-view="grid">
                     <span class="folder-icon">📂</span> All Fragments
+                </div>
+
+                <div class="tree-section">SYSTEM</div>
+                <div class="tree-item" data-folder="system-map" data-view="map">
+                    <span class="folder-icon">🗺️</span> World Map.exe
+                </div>
+                <div class="tree-item" data-folder="system-stats" data-view="stats">
+                    <span class="folder-icon">📊</span> Disk Utility.exe
                 </div>
                 
                 <div class="tree-section collapsible" data-target="statusFolders">
                     <span class="collapse-icon">−</span> BY STATUS
                 </div>
                 <div class="folder-group" id="statusFolders">
-                    <div class="tree-item" data-folder="status-read">
+                    <div class="tree-item" data-folder="status-read" data-view="grid">
                         <span class="folder-icon">📁</span> Read
                     </div>
-                    <div class="tree-item" data-folder="status-unread">
+                    <div class="tree-item" data-folder="status-unread" data-view="grid">
                         <span class="folder-icon">📁</span> Unread
                     </div>
                 </div>
@@ -87,10 +97,11 @@
         <section class="content-pane">
             <div class="pane-header window-controls">
                 <h2 id="currentFolderName">All Fragments</h2>
-                <div class="window-stats" id="folderStats">190 items</div>
+                <div class="window-stats" id="folderStats">{{ books | size }} items</div>
             </div>
             
-            <div class="folder-contents" id="gridContainer">
+            <!-- View 1: The Grid (Existing) -->
+            <div class="folder-contents active-view" id="gridContainer">
                 {% for book in books %}
                 {% assign shadow_colors = "#FF9AA2,#FFDAC1,#E2F0CB,#B5EAD7,#C7CEEA,#FFB7B2" | split: "," %}
                 {% assign color_index = forloop.index | modulo: 6 %}
@@ -101,6 +112,8 @@
                          data-author="{{ book.Author | escape | downcase }}"
                          data-store="{{ book.Store | escape | downcase }}"
                          data-language="{{ book['Original Language'] | escape | downcase }}"
+                         data-price="{{ book['Purchase Price'] | escape }}"
+                         data-date="{{ book['Purchase Date'] | escape }}"
                          data-read="{% if book.Read == 'checked' %}true{% else %}false{% endif %}">
                     {% assign cat_index = forloop.index | modulo: 4 %}
                     <div class="card-cat-container">
@@ -140,8 +153,11 @@
                     </div>
                     
                     <div class="card-header">
+                        <div class="card-top-row">
+                            <h3>{{ book.Author }}</h3>
+                            <button class="view-receipt-btn">RECEIPT.TXT</button>
+                        </div>
                         <h2>{{ book.Title }}</h2>
-                        <h3>{{ book.Author }}</h3>
                     </div>
                     
                     <div class="card-body">
@@ -170,9 +186,56 @@
                 </article>
                 {% endfor %}
             </div>
+
+            <!-- View 2: The Map -->
+            <div id="mapView" class="system-view">
+                <div class="map-controls">
+                    <input type="text" id="mapSearch" placeholder="Find a bookstore or city...">
+                </div>
+                <div id="map"></div>
+                <!-- Magnifying Glass / Detail Overlay -->
+                <div id="cityDetailOverlay" class="city-detail-overlay">
+                    <button class="close-overlay">×</button>
+                    <div id="cityDetailContent"></div>
+                </div>
+            </div>
+
+            <!-- View 3: Stats -->
+            <div id="statsView" class="system-view">
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <h3>Read Progress</h3>
+                        <div class="chart-container" id="readChart"></div>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Language Breakdown</h3>
+                        <div class="chart-container" id="langChart"></div>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Most Common Writers</h3>
+                        <div class="chart-container" id="writerChart"></div>
+                    </div>
+                    <div class="stats-card">
+                        <h3>Acquisition Locations</h3>
+                        <div class="chart-container" id="locationChart"></div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
+    <!-- Thermal Receipt Modal -->
+    <div id="receiptModal" class="system-overlay">
+        <div class="receipt-container">
+            <button class="close-receipt">×</button>
+            <div class="thermal-receipt" id="thermalReceipt">
+                <!-- Content injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Leaflet Map JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="{{ '/script.js' | url }}"></script>
 </body>
 </html>
