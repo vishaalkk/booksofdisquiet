@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books of Disquiet - Archives</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header" id="mainHeader">
+        <!-- The JS will inject a random floating writer SVG here -->
+        
+        <div class="title-container">
+            <svg class="cat-doodle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 100">
+                <path d="M40 80 Q 20 80 20 60 Q 20 40 50 40 Q 60 20 80 30 Q 90 20 110 30 Q 140 30 150 50 Q 180 50 180 70 Q 180 90 150 90 L 40 90 Z" fill="#1C1B18" />
+                <path d="M 60 20 L 50 10 L 70 25 Z" fill="#1C1B18" />
+                <path d="M 100 20 L 110 10 L 90 25 Z" fill="#1C1B18" />
+                <path d="M 140 50 Q 170 30 180 70" stroke="#1C1B18" stroke-width="6" stroke-linecap="round" fill="none" />
+                <text x="120" y="20" font-family="monospace" font-size="12" fill="#1C1B18" class="zzz">Z</text>
+                <text x="135" y="10" font-family="monospace" font-size="16" fill="#1C1B18" class="zzz">Z</text>
+            </svg>
+            <h1>Books of Disquiet</h1>
+            <p class="subtitle">"I am nothing. I'll never be anything. I couldn't want to be something. Apart from that, I have in me all the dreams in the world."</p>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search the archives...">
+            <span class="search-icon">✧</span>
+        </div>
+    </header>
+
+    <main class="system-container">
+        <!-- Sidebar: The Directory Tree -->
+        <aside class="directory-pane">
+            <div class="pane-header">
+                <h2>V:\ARCHIVES\</h2>
+            </div>
+            <div class="folder-tree" id="folderTree">
+                <div class="tree-item active" data-folder="all">
+                    <span class="folder-icon">📂</span> All Fragments
+                </div>
+                
+                <div class="tree-section collapsible" data-target="statusFolders">
+                    <span class="collapse-icon">−</span> BY STATUS
+                </div>
+                <div class="folder-group" id="statusFolders">
+                    <div class="tree-item" data-folder="status-read">
+                        <span class="folder-icon">📁</span> Read
+                    </div>
+                    <div class="tree-item" data-folder="status-unread">
+                        <span class="folder-icon">📁</span> Unread
+                    </div>
+                </div>
+
+                <div class="tree-section collapsible" data-target="languageFolders">
+                    <span class="collapse-icon">−</span> BY LANGUAGE
+                </div>
+                <!-- We will populate these dynamically with JS based on the data -->
+                <div class="folder-group" id="languageFolders"></div>
+                
+                <div class="tree-section collapsible" data-target="authorFolders">
+                    <span class="collapse-icon">−</span> BY WRITER
+                </div>
+                <div class="folder-group collapsed" id="authorFolders"></div>
+                
+                <div class="tree-section collapsible" data-target="storeFolders">
+                    <span class="collapse-icon">−</span> BY BOOKSTORE
+                </div>
+                <div class="folder-group collapsed" id="storeFolders"></div>
+            </div>
+        </aside>
+
+        <!-- Main Window: The Folder Contents -->
+        <section class="content-pane">
+            <div class="pane-header window-controls">
+                <h2 id="currentFolderName">All Fragments</h2>
+                <div class="window-stats" id="folderStats">190 items</div>
+            </div>
+            
+            <div class="folder-contents" id="gridContainer">
+                {% for book in books %}
+                {% assign shadow_colors = "#FF9AA2,#FFDAC1,#E2F0CB,#B5EAD7,#C7CEEA,#FFB7B2" | split: "," %}
+                {% assign color_index = forloop.index | modulo: 6 %}
+                {% assign shadow_color = shadow_colors[color_index] %}
+                
+                <article class="fragment-card" style="--card-shadow: {{ shadow_color }};" 
+                         data-title="{{ book.Title | escape | downcase }}" 
+                         data-author="{{ book.Author | escape | downcase }}"
+                         data-store="{{ book.Store | escape | downcase }}"
+                         data-language="{{ book['Original Language'] | escape | downcase }}"
+                         data-read="{% if book.Read == 'checked' %}true{% else %}false{% endif %}">
+                    {% assign cat_index = forloop.index | modulo: 4 %}
+                    <div class="card-cat-container">
+                        {% if cat_index == 0 %}
+                        <!-- Peeking Cat -->
+                        <svg class="card-cat" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 30 50 Q 30 20 50 20 Q 70 20 70 50" fill="none" stroke="#1C1B18" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 35 25 L 30 5 L 45 15" fill="none" stroke="#1C1B18" stroke-width="4" stroke-linejoin="round"/>
+                            <path d="M 65 25 L 70 5 L 55 15" fill="none" stroke="#1C1B18" stroke-width="4" stroke-linejoin="round"/>
+                            <path d="M 40 35 L 45 35 M 55 35 L 60 35" stroke="#1C1B18" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                        {% elsif cat_index == 1 %}
+                        <!-- Sleeping Loaf -->
+                        <svg class="card-cat" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 25 45 Q 25 20 50 20 Q 75 20 75 45 Z" fill="#1C1B18" />
+                            <path d="M 35 25 L 30 5 L 45 18 Z" fill="#1C1B18"/>
+                            <path d="M 65 25 L 70 5 L 55 18 Z" fill="#1C1B18"/>
+                        </svg>
+                        {% elsif cat_index == 2 %}
+                        <!-- Stretching Cat -->
+                        <svg class="card-cat" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 20 45 Q 40 15 65 35 Q 80 40 90 45" fill="none" stroke="#1C1B18" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="25" cy="25" r="8" fill="none" stroke="#1C1B18" stroke-width="4"/>
+                            <path d="M 18 20 L 15 5 L 25 15" fill="none" stroke="#1C1B18" stroke-width="3" stroke-linejoin="round"/>
+                            <path d="M 32 20 L 35 5 L 25 15" fill="none" stroke="#1C1B18" stroke-width="3" stroke-linejoin="round"/>
+                        </svg>
+                        {% else %}
+                        <!-- Tail up cat -->
+                        <svg class="card-cat" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M 35 45 Q 35 25 55 25 Q 65 25 65 45" fill="none" stroke="#1C1B18" stroke-width="4" stroke-linecap="round"/>
+                            <path d="M 60 28 Q 75 5 85 15" fill="none" stroke="#1C1B18" stroke-width="4" stroke-linecap="round"/>
+                            <circle cx="30" cy="35" r="6" fill="#1C1B18" />
+                            <path d="M 25 32 L 20 20 L 30 28 Z" fill="#1C1B18"/>
+                            <path d="M 35 32 L 40 20 L 30 28 Z" fill="#1C1B18"/>
+                        </svg>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="card-header">
+                        <h2>{{ book.Title }}</h2>
+                        <h3>{{ book.Author }}</h3>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="tag-group">
+                            {% if book['Original Language'] != "" %}<span class="tag lang-tag">{{ book['Original Language'] }}</span>{% endif %}
+                            {% if book.Read == 'checked' %}
+                                <span class="tag read-tag">Read</span>
+                                {% if book.Ratings != "" %}<span class="tag rating-tag">{{ book.Ratings }}★</span>{% endif %}
+                            {% else %}
+                                <span class="tag unread-tag">Unread</span>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="meta-data">
+                            <p><strong>From:</strong> {% if book.Store != "" %}{{ book.Store }}{% else %}Unknown{% endif %}</p>
+                            <p><strong>Date:</strong> {{ book['Purchase Date'] }}</p>
+                            <p><strong>Genre:</strong> {% if book['Genre/Category'] != "" %}{{ book['Genre/Category'] }}{% else %}Fiction{% endif %}</p>
+                        </div>
+                        
+                        {% if book.Notes != "" %}
+                        <div class="notes-doodle">
+                            <p>{{ book.Notes }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <script src="/script.js"></script>
+</body>
+</html>

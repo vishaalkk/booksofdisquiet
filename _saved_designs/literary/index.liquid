@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books of Disquiet</title>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <header>
+                <h1>Books of<br><em>Disquiet</em></h1>
+                <p class="subtitle">A catalogue of fragments, wanderings, and paper.</p>
+            </header>
+
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search titles, authors, cities..." aria-label="Search library">
+            </div>
+
+            <nav class="filters">
+                <h3>View By</h3>
+                <ul>
+                    <li><button class="filter-btn active" data-filter="all">All Fragments</button></li>
+                    <li><button class="filter-btn" data-filter="read">Read</button></li>
+                    <li><button class="filter-btn" data-filter="unread">Unread</button></li>
+                </ul>
+                
+                <div class="stats">
+                    <p>Total Volumes: {{ books.size }}</p>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content">
+            <div class="book-list" id="bookList">
+                {% for book in books %}
+                <!-- Data attributes added for JavaScript filtering -->
+                <article class="book-entry" 
+                         data-title="{{ book.Title | downcase }}" 
+                         data-author="{{ book.Author | downcase }}"
+                         data-location="{{ book.Location | downcase }}"
+                         data-store="{{ book.Store | downcase }}"
+                         data-read="{% if book.Read == 'checked' %}true{% else %}false{% endif %}">
+                    
+                    <div class="book-main">
+                        <h2 class="book-title">{{ book.Title }}</h2>
+                        <h3 class="book-author">{{ book.Author }}</h3>
+                        
+                        {% if book.Notes %}
+                        <p class="book-notes">"{{ book.Notes }}"</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="book-meta">
+                        <div class="meta-column">
+                            <span class="meta-label">Acquired</span>
+                            <span class="meta-value">
+                                {% if book.Store %}{{ book.Store }}{% else %}Unknown{% endif %}
+                                {% if book.Location %}<br><span class="city">{{ book.Location }}</span>{% endif %}
+                            </span>
+                        </div>
+                        <div class="meta-column">
+                            <span class="meta-label">Language</span>
+                            <span class="meta-value">{{ book['Original Language'] }}</span>
+                        </div>
+                        <div class="meta-column">
+                            <span class="meta-label">Status</span>
+                            <span class="meta-value">
+                                {% if book.Read == 'checked' %}
+                                    <span class="status read">Read</span>
+                                    {% if book.Ratings %}<span class="rating">· {{ book.Ratings }}/5</span>{% endif %}
+                                {% else %}
+                                    <span class="status unread">Unread</span>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
