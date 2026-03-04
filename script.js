@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const cityContent = document.getElementById('cityDetailContent');
     const closeOverlay = document.querySelector('.close-overlay');
     
+    // Mobile Nav Elements
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const directoryPane = document.querySelector('.directory-pane');
+
     // Receipt Modal Elements
     const receiptModal = document.getElementById('receiptModal');
     const thermalReceipt = document.getElementById('thermalReceipt');
@@ -307,9 +311,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 5. Attach Event Listeners
     function setupListeners() {
+        // Mobile Toggle logic
+        if (mobileNavToggle) {
+            mobileNavToggle.onclick = (e) => {
+                e.stopPropagation();
+                directoryPane.classList.toggle('drawer-open');
+                mobileNavToggle.innerHTML = directoryPane.classList.contains('drawer-open') ? 
+                    '<span class="folder-icon">✖</span> CLOSE MENU' : 
+                    '<span class="folder-icon">📂</span> BROWSE ARCHIVES';
+            };
+        }
+
         folderTree.addEventListener('click', (e) => {
             const item = e.target.closest('.tree-item');
             if (!item) return;
+
+            // Close drawer on mobile after selection
+            if (window.innerWidth <= 900) {
+                directoryPane.classList.remove('drawer-open');
+                mobileNavToggle.innerHTML = '<span class="folder-icon">📂</span> BROWSE ARCHIVES';
+            }
+
             document.querySelectorAll('.tree-item').forEach(i => {
                 i.classList.remove('active');
                 const icon = i.querySelector('.folder-icon');
@@ -353,6 +375,15 @@ document.addEventListener('DOMContentLoaded', () => {
         window.onclick = (e) => {
             if (e.target === receiptModal) receiptModal.style.display = 'none';
             if (e.target === cityOverlay) cityOverlay.classList.remove('active');
+            
+            // Close mobile drawer when clicking outside
+            if (window.innerWidth <= 900 && 
+                !directoryPane.contains(e.target) && 
+                e.target !== mobileNavToggle && 
+                directoryPane.classList.contains('drawer-open')) {
+                directoryPane.classList.remove('drawer-open');
+                mobileNavToggle.innerHTML = '<span class="folder-icon">📂</span> BROWSE ARCHIVES';
+            }
         };
 
         mapSearch.addEventListener('input', (e) => {
