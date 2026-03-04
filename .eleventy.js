@@ -1,8 +1,8 @@
 module.exports = function(eleventyConfig) {
     eleventyConfig.addPassthroughCopy("style.css");
     eleventyConfig.addPassthroughCopy("script.js");
+    eleventyConfig.addPassthroughCopy("CNAME");
     return {
-        pathPrefix: "/booksofdisquiet/",
         dir: {
             input: ".",
             output: "_site"
