@@ -275,6 +275,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Thermal Receipt Logic ---
+    function getReceiptExtras() {
+        const pool = [
+            // 1. ASCII Cat
+            `<div class="receipt-ascii">
+ /\\_/\\
+( o.o )
+ > ^ <</div>`,
+            // 2. Void ID
+            `<div class="receipt-void-id">VOID_ID: ${Math.random().toString(16).substring(2, 15).toUpperCase()}</div>`,
+            // 3. Mood Tag
+            `<div class="receipt-mood-tag">Mood: ${['Restless', 'Nostalgic', 'Melancholic', 'Dreamy', 'Solitary'][Math.floor(Math.random() * 5)]}</div>`,
+            // 4. Disquiet Stamp
+            `<div class="receipt-stamp">Verified<br>Disquiet<br>Archive</div>`,
+            // 5. Fragility Meter
+            `<div class="receipt-meter-container">
+                Fragility Level:
+                <div class="receipt-meter-bar"><div class="receipt-meter-fill" style="width: ${Math.floor(Math.random() * 60) + 40}%"></div></div>
+            </div>`,
+            // 6. Transaction Type
+            `<div class="receipt-mood-tag" style="background:none; color:#333; border:1px solid #333">Type: Existential Fragment</div>`
+        ];
+        
+        // Shuffle and pick 3-4 items
+        const shuffled = pool.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, Math.floor(Math.random() * 2) + 3).join('');
+    }
+
     function showThermalReceipt(data) {
         thermalReceipt.innerHTML = `
             <div class="receipt-header">
@@ -299,7 +326,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span>TOTAL</span>
                     <span>${data.price || '$0.00'}</span>
                 </div>
-                <div class="barcode"></div>
+                
+                <div class="receipt-extras">
+                    ${getReceiptExtras()}
+                </div>
+
                 <div class="receipt-footer">
                     <p>THANK YOU FOR SUPPORTING THE ARCHIVE.</p>
                     <p>ALL SALES ARE FINAL.</p>

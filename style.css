@@ -692,21 +692,74 @@ h1 {
     justify-content: space-between;
 }
 
-.barcode {
+/* Quirky Receipt Extras */
+.receipt-extras {
     margin-top: 30px;
-    height: 40px;
-    background: repeating-linear-gradient(
-        90deg,
-        #333,
-        #333 1px,
-        #fff 1px,
-        #fff 3px,
-        #333 3px,
-        #333 5px,
-        #fff 5px,
-        #fff 6px
-    );
-    opacity: 0.8;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.receipt-ascii {
+    font-size: 8px;
+    line-height: 1;
+    white-space: pre;
+    text-align: center;
+    color: #444;
+}
+
+.receipt-stamp {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #999;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.6rem;
+    font-weight: bold;
+    color: #999;
+    text-transform: uppercase;
+    transform: rotate(-15deg);
+    padding: 10px;
+}
+
+.receipt-mood-tag {
+    background: #333;
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+}
+
+.receipt-void-id {
+    font-size: 0.6rem;
+    color: #888;
+    word-break: break-all;
+    text-align: center;
+    border-top: 1px dashed #ccc;
+    padding-top: 5px;
+    width: 100%;
+}
+
+.receipt-meter-container {
+    width: 100%;
+    font-size: 0.65rem;
+}
+
+.receipt-meter-bar {
+    height: 6px;
+    background: #eee;
+    border: 1px solid #ccc;
+    margin-top: 3px;
+    position: relative;
+}
+
+.receipt-meter-fill {
+    height: 100%;
+    background: #666;
 }
 
 .receipt-footer {
