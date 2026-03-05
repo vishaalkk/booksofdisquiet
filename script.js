@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapSearch = document.getElementById('mapSearch');
     const folderTree = document.getElementById('folderTree');
     const languageFoldersContainer = document.getElementById('languageFolders');
+    const genreFoldersContainer = document.getElementById('genreFolders');
     const authorFoldersContainer = document.getElementById('authorFolders');
     const storeFoldersContainer = document.getElementById('storeFolders');
     const cards = Array.from(document.querySelectorAll('.fragment-card'));
@@ -68,12 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Dynamic Folder Generation
     const languages = new Set();
+    const genres = new Set();
     const authors = new Set();
     const stores = new Set();
 
     cards.forEach(card => {
         const lang = card.getAttribute('data-language');
         if (lang) languages.add(lang.charAt(0).toUpperCase() + lang.slice(1));
+        
+        const genre = card.getAttribute('data-genre');
+        if (genre && genre.trim() !== '') {
+            genres.add(genre.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '));
+        }
+
         const author = card.getAttribute('data-author');
         if (author && author.trim() !== '') {
             authors.add(author.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '));
@@ -96,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     createFolderItems(languages, languageFoldersContainer, 'language');
+    createFolderItems(genres, genreFoldersContainer, 'genre');
     createFolderItems(authors, authorFoldersContainer, 'author');
     createFolderItems(stores, storeFoldersContainer, 'store');
 
@@ -131,6 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const store = card.getAttribute('data-store') || '';
             const isRead = card.getAttribute('data-read') === 'true';
             const language = card.getAttribute('data-language') || '';
+            const genre = card.getAttribute('data-genre') || '';
 
             const matchesSearch = currentSearch === '' || 
                                   title.includes(currentSearch) || 
@@ -142,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (currentFolderValue === 'read' && !isRead) matchesFolder = false;
                 if (currentFolderValue === 'unread' && isRead) matchesFolder = false;
             } else if (currentFolderType === 'language' && language !== currentFolderValue) matchesFolder = false;
+            else if (currentFolderType === 'genre' && genre !== currentFolderValue) matchesFolder = false;
             else if (currentFolderType === 'author' && author !== currentFolderValue) matchesFolder = false;
             else if (currentFolderType === 'store' && store !== currentFolderValue) matchesFolder = false;
 

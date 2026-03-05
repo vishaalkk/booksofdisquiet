@@ -69,6 +69,11 @@
                 <!-- We will populate these dynamically with JS based on the data -->
                 <div class="folder-group collapsed" id="languageFolders"></div>
                 
+                <div class="tree-section collapsible" data-target="genreFolders">
+                    <span class="collapse-icon">+</span> BY GENRE
+                </div>
+                <div class="folder-group collapsed" id="genreFolders"></div>
+
                 <div class="tree-section collapsible" data-target="authorFolders">
                     <span class="collapse-icon">+</span> BY WRITER
                 </div>
@@ -112,9 +117,10 @@
                          data-author="{{ book.Author | escape | downcase }}"
                          data-store="{{ book.Store | escape | downcase }}"
                          data-language="{{ book['Original Language'] | escape | downcase }}"
+                         data-genre="{{ book['Genre/Category'] | escape | downcase }}"
                          data-price="{{ book['Purchase Price'] | escape }}"
                          data-date="{{ book['Purchase Date'] | escape }}"
-                         data-read="{% if book.Read == 'checked' %}true{% else %}false{% endif %}">
+                         data-read="{% if book.Read == 'checked' or book.Read == true %}true{% else %}false{% endif %}">
                     {% assign cat_index = forloop.index | modulo: 4 %}
                     <div class="card-cat-container">
                         {% if cat_index == 0 %}
@@ -162,22 +168,22 @@
                     
                     <div class="card-body">
                         <div class="tag-group">
-                            {% if book['Original Language'] != "" %}<span class="tag lang-tag">{{ book['Original Language'] }}</span>{% endif %}
-                            {% if book.Read == 'checked' %}
+                            {% if book['Original Language'] and book['Original Language'] != "" %}<span class="tag lang-tag">{{ book['Original Language'] }}</span>{% endif %}
+                            {% if book.Read == 'checked' or book.Read == true %}
                                 <span class="tag read-tag">Read</span>
-                                {% if book.Ratings != "" %}<span class="tag rating-tag">{{ book.Ratings }}★</span>{% endif %}
+                                {% if book.Ratings and book.Ratings != "" %}<span class="tag rating-tag">{{ book.Ratings }}★</span>{% endif %}
                             {% else %}
                                 <span class="tag unread-tag">Unread</span>
                             {% endif %}
                         </div>
                         
                         <div class="meta-data">
-                            <p><strong>From:</strong> {% if book.Store != "" %}{{ book.Store }}{% else %}Unknown{% endif %}</p>
+                            <p><strong>From:</strong> {% if book.Store and book.Store != "" %}{{ book.Store }}{% else %}Unknown{% endif %}</p>
                             <p><strong>Date:</strong> {{ book['Purchase Date'] }}</p>
-                            <p><strong>Genre:</strong> {% if book['Genre/Category'] != "" %}{{ book['Genre/Category'] }}{% else %}Fiction{% endif %}</p>
+                            <p><strong>Genre:</strong> {% if book['Genre/Category'] and book['Genre/Category'] != "" %}{{ book['Genre/Category'] }}{% else %}Fiction{% endif %}</p>
                         </div>
                         
-                        {% if book.Notes != "" %}
+                        {% if book.Notes and book.Notes != "" %}
                         <div class="notes-doodle">
                             <p>{{ book.Notes }}</p>
                         </div>
