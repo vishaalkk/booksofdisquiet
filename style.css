@@ -37,25 +37,65 @@ body {
 }
 
 /* Floating Writer Caricatures */
-.floating-writer {
+.floating-writer-wrapper {
     position: absolute;
+    z-index: 10;
+    pointer-events: auto;
+    cursor: help;
+    transition: transform 0.2s, z-index 0s;
+}
+
+.floating-writer-wrapper:hover {
+    z-index: 100;
+    transform: scale(1.05) !important;
+}
+
+.floating-writer {
     width: 130px;
     height: 160px;
     object-fit: cover;
-    z-index: 0; /* Changed to 0 so they sit behind the main content if they overlap */
-    pointer-events: none; /* So they don't block clicks */
-    
+    display: block;
+
     /* Neo-brutalist / Newspaper Clipping Aesthetic */
     border: 3px solid var(--ink);
     box-shadow: 6px 6px 0px var(--ink);
     background-color: var(--paper);
     padding: 6px; /* White border like a retro photo */
-    
+
     /* Make them look harsh, retro, and printed */
     filter: grayscale(100%) contrast(140%) brightness(1.1);
     mix-blend-mode: multiply; /* Lets the background grid show through the white areas */
+    transition: filter 0.2s;
 }
 
+.floating-writer-wrapper:hover .floating-writer {
+    filter: grayscale(0%) contrast(110%) brightness(1);
+    mix-blend-mode: normal;
+}
+
+.writer-name-tooltip {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 6px 12px;
+    font-family: var(--font-mono);
+    font-weight: bold;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s, bottom 0.2s;
+    border-radius: 4px;
+    box-shadow: 4px 4px 0px rgba(28, 27, 24, 0.2);
+}
+
+.floating-writer-wrapper:hover .writer-name-tooltip {
+    opacity: 1;
+    bottom: -35px;
+}
 .title-container {
     position: relative; /* This is the anchor point for the floating writers */
     z-index: 10;
@@ -379,14 +419,34 @@ h1 {
     border: none;
     font-family: var(--font-mono);
     font-size: 0.6rem;
-    padding: 2px 6px;
+    padding: 3px 6px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     white-space: nowrap;
+    border-radius: 2px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.view-receipt-btn::before {
+    content: "↓";
+    font-size: 0.7rem;
+    line-height: 1;
 }
 
 .view-receipt-btn:hover {
     background: #444;
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.2);
+}
+
+.view-receipt-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
 }
 
 .card-header h3 {
@@ -707,6 +767,28 @@ h1 {
     white-space: pre;
     text-align: center;
     color: #444;
+}
+
+.receipt-quote {
+    font-family: 'Space Mono', monospace;
+    font-style: italic;
+    font-size: 0.85rem;
+    margin: 15px 0;
+    padding-left: 10px;
+    border-left: 2px dashed #666;
+    line-height: 1.4;
+    text-align: left;
+    color: #333;
+}
+
+.receipt-quote-author {
+    display: block;
+    margin-top: 5px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 0.75rem;
+    text-align: right;
+    color: #555;
 }
 
 .receipt-stamp {

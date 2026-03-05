@@ -46,25 +46,55 @@ document.addEventListener('DOMContentLoaded', () => {
         { name: "Fyodor Dostoevsky", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg/500px-Vasily_Perov_-_%D0%9F%D0%BE%D1%80%D1%82%D1%80%D0%B5%D1%82_%D0%A4.%D0%9C.%D0%94%D0%BE%D1%81%D1%82%D0%BE%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%B3%D0%BE_-_Google_Art_Project.jpg" },
         { name: "Sylvia Plath", img: "https://upload.wikimedia.org/wikipedia/commons/d/d0/Sylvia_Plath.jpg" },
         { name: "Karl Ove Knausgaard", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Karl_Ove_Knausg%C3%A5rd_2024_in_M%C3%BCnchen_02.jpg/500px-Karl_Ove_Knausg%C3%A5rd_2024_in_M%C3%BCnchen_02.jpg" },
-        { name: "Javier Marías", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Javier_Mar%C3%ADas_%28Feria_del_Libro_de_Madrid%2C_31_de_mayo_de_2008%29.jpg/500px-Javier_Mar%C3%ADas_%28Feria_del_Libro_de_Madrid%2C_31_de_mayo_de_2008%29.jpg" }
+        { name: "Javier Marías", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Javier_Mar%C3%ADas_%28Feria_del_Libro_de_Madrid%2C_31_de_mayo_de_2008%29.jpg/500px-Javier_Mar%C3%ADas_%28Feria_del_Libro_de_Madrid%2C_31_de_mayo_de_2008%29.jpg" },
+        { name: "Albert Camus", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Albert_Camus%2C_gagnant_de_prix_Nobel%2C_portrait_en_buste%2C_pos%C3%A9_au_bureau%2C_faisant_face_%C3%A0_gauche%2C_cigarette_de_tabagisme.jpg/500px-Albert_Camus%2C_gagnant_de_prix_Nobel%2C_portrait_en_buste%2C_pos%C3%A9_au_bureau%2C_faisant_face_%C3%A0_gauche%2C_cigarette_de_tabagisme.jpg" },
+        { name: "Forough Farrokhzad", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Forough_Farrokhzad%2C_1960s.jpg/330px-Forough_Farrokhzad%2C_1960s.jpg" },
+        { name: "Franz Kafka", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Franz_Kafka%2C_1923.jpg/500px-Franz_Kafka%2C_1923.jpg" },
+        { name: "Natalia Ginzburg", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Natalia_Ginzburg_1956.jpg/500px-Natalia_Ginzburg_1956.jpg" },
+        { name: "Hisham Matar", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Hisham_Matar%2C_author%2C_at_the_2024_National_Book_Awards_finalist_reading_2_%28cropped%29.jpg/500px-Hisham_Matar%2C_author%2C_at_the_2024_National_Book_Awards_finalist_reading_2_%28cropped%29.jpg" },
+        { name: "Hermann Hesse", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Hermann_Hesse_2.jpg/500px-Hermann_Hesse_2.jpg" },
+        { name: "Somerset Maugham", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Maugham_retouched.jpg/500px-Maugham_retouched.jpg" },
+        { name: "Joan Didion", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Didion1970_%28cropped%29.jpg/500px-Didion1970_%28cropped%29.jpg" },
+        { name: "James Baldwin", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/James_Baldwin_37_Allan_Warren_%28cropped%29.jpg/500px-James_Baldwin_37_Allan_Warren_%28cropped%29.jpg" },
+        { name: "Marcel Proust", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Otto_Wegener_Proust_vers_1895_bis.jpg/500px-Otto_Wegener_Proust_vers_1895_bis.jpg" },
+        { name: "Tezer Ozlu", img: "https://upload.wikimedia.org/wikipedia/tr/c/c7/TezerOzlu.jpg" },
+        { name: "Sadegh Hedayat", img: "https://upload.wikimedia.org/wikipedia/commons/2/24/Sadegh_Hedayat.jpg" },
+        { name: "Wislawa Szymborska", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Wis%C5%82awa_Szymborska_2009.10.23_%281%29.jpg/330px-Wis%C5%82awa_Szymborska_2009.10.23_%281%29.jpg" },
+        { name: "Marina Tsvetaeva", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/%D0%9C%D0%B0%D1%80%D0%B8%D0%BD%D0%B0_%D0%A6%D0%B2%D0%B5%D1%82%D0%B0%D0%B5%D0%B2%D0%B0_%281925%29_%28cropped%29.jpg/500px-%D0%9C%D0%B0%D1%80%D0%B8%D0%BD%D0%B0_%D0%A6%D0%B2%D0%B5%D1%82%D0%B0%D0%B5%D0%B2%D0%B0_%281925%29_%28cropped%29.jpg" },
+        { name: "Rainer Maria Rilke", img: "https://upload.wikimedia.org/wikipedia/commons/5/5d/Rainer_Maria_Rilke_1900.jpg" },
+        { name: "Toni Morrison", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Toni_Morrison.jpg/500px-Toni_Morrison.jpg" },
+        { name: "Milan Kundera", img: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Milan_Kundera_redux.jpg/500px-Milan_Kundera_redux.jpg" }
     ];
 
     shuffleArray(writers);
     const titleContainerEl = document.querySelector('.title-container');
 
     writers.slice(0, 2).forEach((writer, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'floating-writer-wrapper';
+        
         const img = document.createElement('img');
         img.className = 'floating-writer';
         img.src = writer.img;
         img.alt = writer.name;
-        img.title = writer.name;
-        img.style.transform = `rotate(${(Math.random() * 20) - 10}deg)`;
+        // Native title tooltip is removed so we can use our custom one
+
+        const tooltip = document.createElement('div');
+        tooltip.className = 'writer-name-tooltip';
+        tooltip.innerText = writer.name;
+
+        wrapper.appendChild(img);
+        wrapper.appendChild(tooltip);
+
+        wrapper.style.transform = `rotate(${(Math.random() * 20) - 10}deg)`;
         const randomTop = Math.floor(Math.random() * 80) - 20;
         const sideOffset = -150 - Math.floor(Math.random() * 60);
-        if (index === 0) img.style.left = sideOffset + 'px';
-        else img.style.right = sideOffset + 'px';
-        img.style.top = randomTop + 'px';
-        titleContainerEl.appendChild(img);
+        
+        if (index === 0) wrapper.style.left = sideOffset + 'px';
+        else wrapper.style.right = sideOffset + 'px';
+        wrapper.style.top = randomTop + 'px';
+        
+        titleContainerEl.appendChild(wrapper);
     });
 
     // 2. Dynamic Folder Generation
@@ -287,38 +317,108 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Thermal Receipt Logic ---
     function getReceiptExtras() {
+        const quotes = [
+            // Fyodor Dostoevsky
+            { text: "What is hell? I maintain that it is the suffering of being unable to love.", author: "Fyodor Dostoevsky" },
+            { text: "Pain and suffering are always inevitable for a large intelligence and a deep heart.", author: "Fyodor Dostoevsky" },
+            // Karl Ove Knausgaard
+            { text: "For an instant I thought of the days of my youth, and I breathed in the air, but I breathed in nothing but the wind.", author: "Karl Ove Knausgaard" },
+            { text: "The only thing I have learned from life is that you have to endure it, never give up, and never let go.", author: "Karl Ove Knausgaard" },
+            // Albert Camus
+            { text: "In the depth of winter, I finally learned that within me there lay an invincible summer.", author: "Albert Camus" },
+            { text: "There is only one really serious philosophical problem, and that is suicide.", author: "Albert Camus" },
+            // W. Somerset Maugham
+            { text: "It is an illusion that youth is happy, an illusion of those who have lost it.", author: "W. Somerset Maugham" },
+            { text: "We are not the same persons this year as last; nor are those we love. It is a happy chance if we, changing, continue to love a changed person.", author: "W. Somerset Maugham" },
+            // Marcel Proust
+            { text: "The true paradises are the paradises that we have lost.", author: "Marcel Proust" },
+            { text: "We do not receive wisdom, we must discover it for ourselves, after a journey through the wilderness which no one else can make for us.", author: "Marcel Proust" },
+            // Sylvia Plath
+            { text: "I took a deep breath and listened to the old brag of my heart: I am, I am, I am.", author: "Sylvia Plath" },
+            { text: "Is there no way out of the mind?", author: "Sylvia Plath" },
+            // Franz Kafka
+            { text: "A book must be the axe for the frozen sea within us.", author: "Franz Kafka" },
+            { text: "I have the true feeling of myself only when I am unbearably unhappy.", author: "Franz Kafka" },
+            // Fernando Pessoa
+            { text: "I am nothing. I'll never be anything. I couldn't want to be anything. Apart from that, I have in me all the dreams in the world.", author: "Fernando Pessoa" },
+            { text: "To feel is to be distracted.", author: "Fernando Pessoa" },
+            // Clarice Lispector
+            { text: "I am so mysterious that I don't even understand myself.", author: "Clarice Lispector" },
+            { text: "I write as if to save somebody's life. Probably my own.", author: "Clarice Lispector" },
+            // Joan Didion
+            { text: "We tell ourselves stories in order to live.", author: "Joan Didion" },
+            { text: "I have already lost touch with a couple of people I used to be.", author: "Joan Didion" },
+            // Hermann Hesse
+            { text: "Art was a union of the father and mother worlds, of mind and blood.", author: "Hermann Hesse" },
+            { text: "If you hate a person, you hate something in him that is part of yourself. What isn't part of ourselves doesn't disturb us.", author: "Hermann Hesse" },
+            // James Baldwin
+            { text: "Love takes off the masks that we fear we cannot live without and know we cannot live within.", author: "James Baldwin" },
+            { text: "Not everything that is faced can be changed, but nothing can be changed until it is faced.", author: "James Baldwin" },
+            // Tezer Özlü
+            { text: "Life is not something to be lived, but something to be endured.", author: "Tezer Özlü" },
+            { text: "I have always been a stranger to myself and to the world.", author: "Tezer Özlü" },
+            // Hisham Matar
+            { text: "Exile is a kind of death. It is a separation from the self, a loss of the familiar, a displacement that can never be fully repaired.", author: "Hisham Matar" },
+            { text: "Memory is a fickle thing. It can be a source of comfort, but it can also be a source of pain. It can be a way of holding on to the past, but it can also be a way of being trapped by it.", author: "Hisham Matar" },
+            // Javier Marías
+            { text: "Life is a very bad novelist. It is chaotic and ludicrous.", author: "Javier Marías" },
+            { text: "Listening is the most dangerous thing of all, listening means knowing.", author: "Javier Marías" },
+            // Marina Tsvetaeva
+            { text: "This sickness is incurable and it is called soul.", author: "Marina Tsvetaeva" },
+            { text: "Wings are freedom only when they are wide open in flight. On one's back they are a heavy weight.", author: "Marina Tsvetaeva" },
+            // Rainer Maria Rilke
+            { text: "Let everything happen to you: beauty and terror. Just keep going. No feeling is final.", author: "Rainer Maria Rilke" },
+            { text: "Perhaps all the dragons in our lives are princesses who are only waiting to see us act, just once, with beauty and courage.", author: "Rainer Maria Rilke" },
+            // Toni Morrison
+            { text: "If you surrendered to the air, you could ride it.", author: "Toni Morrison" },
+            { text: "Freeing yourself was one thing, claiming ownership of that freed self was another.", author: "Toni Morrison" },
+            // Milan Kundera
+            { text: "The struggle of man against power is the struggle of memory against forgetting.", author: "Milan Kundera" },
+            { text: "Anyone whose goal is 'something higher' must expect someday to suffer vertigo.", author: "Milan Kundera" },
+            // Natalia Ginzburg
+            { text: "We must always try to be better than we are.", author: "Natalia Ginzburg" },
+            { text: "A writer must be attentive and solitary, like a solitary spy.", author: "Natalia Ginzburg" },
+            // Sadegh Hedayat
+            { text: "In life there are wounds that, like a leprosy, silently eat away and consume the soul.", author: "Sadegh Hedayat" },
+            { text: "I am like a man who has suddenly been thrown into deep water and who struggles to save himself.", author: "Sadegh Hedayat" },
+            // Wisława Szymborska
+            { text: "Listen, how your heart beats in me.", author: "Wisława Szymborska" },
+            { text: "There is no life that couldn't be immortal if only for a moment.", author: "Wisława Szymborska" },
+            // Forough Farrokhzad
+            { text: "I am cold, and I know that from the illusions of the red poppies I will gather nothing but a handful of dried leaves.", author: "Forough Farrokhzad" },
+            { text: "I speak out of the deep of night, out of the deep of darkness.", author: "Forough Farrokhzad" },
+            // Emily Dickinson
+            { text: "I'm Nobody! Who are you?<br>Are you – Nobody – too?", author: "Emily Dickinson" },
+            { text: "Because I could not stop for Death –<br>He kindly stopped for me –", author: "Emily Dickinson" },
+            { text: "Hope is the thing with feathers<br>That perches in the soul.", author: "Emily Dickinson" }
+        ];
+
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
         const pool = [
             // 1. ASCII Cat
             `<div class="receipt-ascii">
- /\\_/\\
-( o.o )
- > ^ <</div>`,
+    /\\_/\\
+    ( o.o )
+    > ^ <</div>`,
             // 2. Void ID
             `<div class="receipt-void-id">VOID_ID: ${Math.random().toString(16).substring(2, 15).toUpperCase()}</div>`,
-            // 3. Mood Tag
-            `<div class="receipt-mood-tag">Mood: ${['Restless', 'Nostalgic', 'Melancholic', 'Dreamy', 'Solitary'][Math.floor(Math.random() * 5)]}</div>`,
-            // 4. Disquiet Stamp
-            `<div class="receipt-stamp">Verified<br>Disquiet<br>Archive</div>`,
-            // 5. Fragility Meter
-            `<div class="receipt-meter-container">
-                Fragility Level:
-                <div class="receipt-meter-bar"><div class="receipt-meter-fill" style="width: ${Math.floor(Math.random() * 60) + 40}%"></div></div>
-            </div>`,
-            // 6. Transaction Type
-            `<div class="receipt-mood-tag" style="background:none; color:#333; border:1px solid #333">Type: Existential Fragment</div>`
+            // 3. Existential Quote
+            `<div class="receipt-quote">
+                "${randomQuote.text}"<br>
+                <span class="receipt-quote-author">— ${randomQuote.author}</span>
+            </div>`
         ];
-        
+
         // Shuffle and pick 3-4 items
         const shuffled = pool.sort(() => 0.5 - Math.random());
         return shuffled.slice(0, Math.floor(Math.random() * 2) + 3).join('');
     }
-
     function showThermalReceipt(data) {
         thermalReceipt.innerHTML = `
             <div class="receipt-header">
                 <h4>V:\\ARCHIVES</h4>
                 <p>${data.store.toUpperCase()}</p>
-                <p>FRAGMENT ACQUISITION</p>
             </div>
             <div class="receipt-body">
                 <div class="receipt-row">
@@ -343,8 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
 
                 <div class="receipt-footer">
-                    <p>THANK YOU FOR SUPPORTING THE ARCHIVE.</p>
-                    <p>ALL SALES ARE FINAL.</p>
+                    <p>ALL SALES ARE AS FINAL AS DEATH.</p>
                 </div>
             </div>
         `;
