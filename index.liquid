@@ -52,7 +52,7 @@
             </div>
             <div class="folder-tree" id="folderTree">
                 <div class="tree-item active" data-folder="all" data-view="grid">
-                    <span class="folder-icon">📂</span> All Fragments
+                    <span class="folder-icon">📂</span> Books In My Collection
                 </div>
 
                 <div class="tree-section">SYSTEM</div>
@@ -64,30 +64,29 @@
                 </div>
                 
                 <div class="tree-section collapsible" data-target="languageFolders">
-                    <span class="collapse-icon">+</span> BY LANGUAGE
+                    <span class="collapse-icon">+</span> ORIGINAL LANGUAGE
                 </div>
                 <!-- We will populate these dynamically with JS based on the data -->
                 <div class="folder-group collapsed" id="languageFolders"></div>
-                
+
                 <div class="tree-section collapsible" data-target="genreFolders">
-                    <span class="collapse-icon">+</span> BY GENRE
+                    <span class="collapse-icon">+</span> GENRE
                 </div>
                 <div class="folder-group collapsed" id="genreFolders"></div>
 
                 <div class="tree-section collapsible" data-target="authorFolders">
-                    <span class="collapse-icon">+</span> BY WRITER
+                    <span class="collapse-icon">+</span> WRITER
                 </div>
                 <div class="folder-group collapsed" id="authorFolders"></div>
-                
+
                 <div class="tree-section collapsible" data-target="storeFolders">
-                    <span class="collapse-icon">+</span> BY BOOKSTORE
+                    <span class="collapse-icon">+</span> BOOKSTORE
                 </div>
                 <div class="folder-group collapsed" id="storeFolders"></div>
 
                 <div class="tree-section collapsible" data-target="statusFolders">
-                    <span class="collapse-icon">+</span> BY STATUS
-                </div>
-                <div class="folder-group collapsed" id="statusFolders">
+                    <span class="collapse-icon">+</span> STATUS
+                </div>                <div class="folder-group collapsed" id="statusFolders">
                     <div class="tree-item" data-folder="status-read" data-view="grid">
                         <span class="folder-icon">📁</span> Read
                     </div>
@@ -101,7 +100,7 @@
         <!-- Main Window: The Folder Contents -->
         <section class="content-pane">
             <div class="pane-header window-controls">
-                <h2 id="currentFolderName">All Fragments</h2>
+                <h2 id="currentFolderName">Books In My Collection</h2>
                 <div class="window-stats" id="folderStats">{{ books | size }} items</div>
             </div>
             
