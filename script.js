@@ -205,7 +205,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'karachi': { coords: [24.8607, 67.0011], color: '#E2F0CB', icon: '🕌', name: 'Karachi' },
         'berkeley': { coords: [37.8715, -122.2730], color: '#FF9AA2', icon: '🎓', name: 'Berkeley' },
         'new haven': { coords: [41.3083, -72.9279], color: '#B5EAD7', icon: '🗝️', name: 'New Haven' },
-        'austin': { coords: [30.2672, -97.7431], color: '#C7CEEA', icon: '🎸', name: 'Austin' }
+        'austin': { coords: [30.2672, -97.7431], color: '#C7CEEA', icon: '🎸', name: 'Austin' },
+        'paris': { coords: [48.8566, 2.3522], color: '#E0BBE4', icon: '🥐', name: 'Paris' },
+        'lisbon': { coords: [38.7223, -9.1393], color: '#FFD3B6', icon: '🚋', name: 'Lisbon' }
     };
 
     function createStampSVG(city) {
